@@ -120,6 +120,7 @@
 import React, { useState, useEffect } from "react";
 // import axios from 'axios';
 import CardComponent from "../components/CardComponent";
+import SignUp from "../components/SignUp";
 import exp from "constants";
 
 interface User {
@@ -134,11 +135,24 @@ export default function Home() {
   const [newUser, setNewUser] = useState({ name: "", email: "" });
   const [updateUser, setUpdateUser] = useState({ id: "", name: "", email: "" });
 
-  //fetch users
+  useEffect(() => {
+    const fetchDoctorsAvailable = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/doctors`);
+        const data = await response.json();
+        console.log("doctors", data);
+        // setUsers(data.reverse());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchDoctorsAvailable();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get(`${apiUrl}/users`);
         const response = await fetch(`${apiUrl}/api/users`);
         const data = await response.json();
         console.log("users", data);
@@ -151,23 +165,22 @@ export default function Home() {
     fetchData();
   }, []);
 
-
   // const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
   const createUser = async () => {
     // e.preventDefault();
     const newUser = {
-      email: "test@mail.com",
+      email: "tester@mail.com",
       date_of_birth: new Date().toISOString(),
-      password: "pass"
-    }
+      password: "pass",
+    };
     try {
       // const response = await axios.post(`${apiUrl}/users`, newUser);
-      const response = await fetch(`${apiUrl}/api/users`, {
+      const response = await fetch(`${apiUrl}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUser)
+        body: JSON.stringify(newUser),
       });
       const data = await response.json();
       setUsers([data, ...users]);
@@ -177,31 +190,69 @@ export default function Home() {
     }
   };
 
-  // async function postData(url = "", data = {}) {
-  //   // Default options are marked with *
-  //   const response = await fetch(url, {
-  //     method: "POST", // *GET, POST, PUT, DELETE, etc.
-  //     mode: "cors", // no-cors, *cors, same-origin
-  //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-  //     credentials: "same-origin", // include, *same-origin, omit
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // 'Content-Type': 'application/x-www-form-urlencoded',
-  //     },
-  //     redirect: "follow", // manual, *follow, error
-  //     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-  //     body: JSON.stringify(data), // body data type must match "Content-Type" header
-  //   });
-  //   return response.json(); // parses JSON response into native JavaScript objects
-  // }
+  const loginUser = async () => {
+    const userDetails = {
+      email: "tester@mail.com",
+      password: "pass",
+    };
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userDetails),
+      });
+      const data = await response.json();
+      console.log(data);
+      // setUsers([data, ...users]);
+      // setNewUser({ name: "", email: "" });
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
+
+  const createAppointment = async () => {
+    const appointment = {
+      id: 1,
+      type: "check up w/ Leo Stanton",
+      appointment: "2024-01-20T12:43:39.017Z",
+      doctor_id: 1,
+      user_id: 1,
+    };
+    try {
+      const response = await fetch(`${apiUrl}/api/appointments/1`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appointment),
+      });
+      const data = await response.json();
+      console.log(data);
+      // setUsers([data, ...users]);
+      // setNewUser({ name: "", email: "" });
+    } catch (error) {
+      console.error("Error creating appointment:", error);
+    }
+  };
 
   return (
-    <main>
-      <h1>Alive</h1>
-      <button onClick={createUser}>Create</button>
+    <main className={`min-h-screen items-center  p-16`}>
+      {/* <h1>Alive</h1>
+      <div>
+        <button onClick={createUser}>Create</button>
+      </div>
+      <div>
+        <button onClick={loginUser}>loginUser</button>
+      </div>
+      <div>
+        <button onClick={createAppointment}>createAppointment</button>
+      </div>
       {users.map((user) => (
         <div key={user.id}>none</div>
-      ))}
+      ))} */}
+      <SignUp />
     </main>
   );
 }

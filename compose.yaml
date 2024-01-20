@@ -22,11 +22,8 @@ services:
       dockerfile: backend.dockerfile
     ports:
       - 4000:4000
-    # links:
-    #   - postgres
     environment:
       DB_HOST: host.docker.internal
-      # DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres?schema=public
       URL: postgresql://postgres:postgres@postgres:5432/postgres?schema=public
       DB_USER: postgres
       DB_PASSWORD: postgres

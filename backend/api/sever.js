@@ -2,10 +2,10 @@ const express = require("express");
 // const cors = require('cors');
 // const helmet = require('helmet');
 
-// const authRouter = require('../auth/auth-router');
-// const parksRouter = require('../parks/parks-router');
-// const ratingsRouter = require('../ratings/ratings-router')
-const usersRouter = require("../users/user-router");
+const authRouter = require("./auth/auth-router");
+const usersRouter = require("./users/user-router");
+const doctorsRouter = require("./doctors/doctors-router");
+const appointmentsRouter = require("./appointments/appointments-router");
 
 const app = express();
 
@@ -20,10 +20,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/api/auth', authRouter)
-// app.use('/api/parks', parksRouter)
-// app.use('/api/ratings', ratingsRouter)
+app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/doctors", doctorsRouter);
+app.use("/api/appointments", appointmentsRouter);
 
 app.get("/", (req, res) => {
   try {

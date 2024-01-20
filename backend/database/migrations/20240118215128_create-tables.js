@@ -23,6 +23,7 @@ exports.up = function (knex) {
     .createTable("appointments", (tbl) => {
       tbl.increments();
       tbl.datetime("appointment");
+      tbl.string("type").nullable();
       tbl
         .integer("doctor_id")
         .unsigned()
