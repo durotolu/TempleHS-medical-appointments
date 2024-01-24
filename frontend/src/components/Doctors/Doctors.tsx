@@ -4,6 +4,7 @@ import AppointmentModal, { Appointment } from "../AppointmentModal";
 import Sidebar from "../Sidebar";
 import Topbar from "./Topbar";
 import DoctorCard from "./DoctorCard";
+import WithAuth from "@/components/helpers/WithAuth";
 
 interface Appointments {
   id: number;
@@ -20,16 +21,6 @@ export interface Doctor {
   photo: string;
   appointments: Appointments[];
 }
-
-const dayOfWeek = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thur",
-  5: "Fri",
-  6: "Sat",
-};
 
 const Doctors = () => {
   const apiUrl: string =
@@ -133,4 +124,5 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+// export default Doctors;
+export default WithAuth(Doctors);

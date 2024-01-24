@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import Scheduler from "./scheduler";
 import Sidebar from "./Sidebar";
+import withAuth from "./helpers/WithAuth";
 
 export interface Appointment {
   StartTime: string;
@@ -56,4 +57,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default withAuth(Calendar);
