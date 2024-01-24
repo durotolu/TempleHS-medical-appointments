@@ -4,8 +4,6 @@ module.exports = {
   checkRegisterInput,
   checkLoginInput,
   verifyToken,
-  // checkApartmentInput,
-  // validateApartmentId,
 };
 
 function checkLoginInput(req, res, next) {
@@ -47,29 +45,3 @@ function verifyToken(req, res, next) {
     res.status(400).json({ message: "No credentials provided" });
   }
 }
-
-// function checkApartmentInput(req, res, next) {
-//   const { address, city, toilets, bathrooms, bedrooms } = req.body;
-//   if (address && city && toilets && bathrooms && bedrooms) {
-//     next();
-//   } else {
-//     res.status(403).json({ message: "missing required field(s)" });
-//   }
-// }
-
-// function validateApartmentId(req, res, next) {
-//   Apartment.findBy(req.params.id)
-//     .then((apartment) => {
-//       if (apartment) {
-//         req.apartment = apartment;
-//         next();
-//       } else {
-//         res.status(404).json({ message: "invalid apartment id" });
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(500).json({
-//         "something went wrong quering db": error.message,
-//       });
-//     });
-// }

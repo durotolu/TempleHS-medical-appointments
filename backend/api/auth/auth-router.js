@@ -2,11 +2,9 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 
 const Auth = require("../users/users-model");
-// const midware = require("../middleware/middleware");
 const generateToken = require("./generate-token");
-const midware = require('../../middleware/middleware');
+const midware = require("../../middleware/middleware");
 
-// router.post("/register", midware.checkUserInput, (req, res) => {
 router.post("/register", midware.checkRegisterInput, (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
@@ -28,7 +26,6 @@ router.post("/register", midware.checkRegisterInput, (req, res) => {
   });
 });
 
-// router.post("/login", midware.checkUserInput, (req, res) => {
 router.post("/login", midware.checkLoginInput, async (req, res) => {
   let user = await req.body;
   Auth.findByEmail(user.email)

@@ -9,7 +9,8 @@ exports.seed = async function (knex) {
     {
       id: 1,
       name: "Leo Stanton",
-      title: "MD",
+      degree: "MD",
+      title: "Care Team Clinician Supervisor",
       bio: "Dr. Leo Nieto is a board certified Internist with a broad experience treating both complex and simple medical conditions. He has been practicing for more than 10 years. He graduated from Tufts Univ...",
       in_person: false,
       photo: "",
@@ -17,7 +18,8 @@ exports.seed = async function (knex) {
     {
       id: 2,
       name: "Marcelino Kindred",
-      title: "MD",
+      degree: "MD",
+      title: "Medical Doctor",
       bio: "Dr. Marcelino is a board-certified Internal Medicine physician based in San Diego, CA. He received his Doctor of Osteopathic Medicine degree from Western University/COMP in Pomona, CA and completed...",
       in_person: true,
       photo: "",
@@ -25,7 +27,8 @@ exports.seed = async function (knex) {
     {
       id: 3,
       name: "Pat Alexander",
-      title: "DO",
+      degree: "DO",
+      title: "Medical Doctor",
       bio: "Dr. Pat Nieto is a Family Practice physician with Doctor on Demand. Dr. Mattis received her undergraduate degree from Smith College in 2004, and her medical degree from Columbia University in 2008...",
       in_person: false,
       photo: "",
@@ -33,7 +36,8 @@ exports.seed = async function (knex) {
     {
       id: 4,
       name: "Audrey Simmmons",
-      title: "MD",
+      degree: "MD",
+      title: "Medical Doctor",
       bio: "Dr. Audrey is a board certified Internist with a broad experience treating both complex and simple medical conditions. He has been practicing for more than 10 years. He graduated from Tufts Univ...",
       in_person: true,
       photo: "",
