@@ -8,18 +8,15 @@ interface UserLogin {
   email: string;
 }
 
-// const Login: React.FC<{ card: Card }> = ({ card }) => {
 const Login = () => {
   const apiUrl: string =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   const ref = useRef<HTMLFormElement>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
@@ -36,17 +33,16 @@ const Login = () => {
         },
         body: JSON.stringify(loginDetails),
       });
-
       if (!response.ok) {
         const errorDetails = await response.json();
         throw new Error(
           errorDetails.message || "Failed to submit the data. Please try again."
         );
       }
-
       const data = await response.json();
-      localStorage.setItem('token', data.token)
+      localStorage.setItem("token", data.token);
       localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("user_email", data.user_email);
       router.push("/doctors");
     } catch (error) {
       let message;
@@ -54,7 +50,6 @@ const Login = () => {
       else message = String(error);
       setError(message);
     } finally {
-      setIsLoading(false);
       ref.current?.reset();
     }
   };

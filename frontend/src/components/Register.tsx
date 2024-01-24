@@ -13,13 +13,11 @@ const Register = () => {
   const apiUrl: string =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   const ref = useRef<HTMLFormElement>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const createUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
@@ -27,7 +25,6 @@ const Register = () => {
       email: formData.get("email") as string,
       date_of_birth: formData.get("dateOfBirth") as string,
       password: formData.get("password") as string,
-      // date_of_birth: new Date().toISOString(),
     };
 
     try {
@@ -44,7 +41,6 @@ const Register = () => {
           errorDetails.message || "Failed to submit the data. Please try again."
         );
       }
-      // const data = await response.json();
       router.push("/login");
     } catch (error) {
       let message;
@@ -52,7 +48,6 @@ const Register = () => {
       else message = String(error);
       setError(message);
     } finally {
-      setIsLoading(false);
       ref.current?.reset();
     }
   };
