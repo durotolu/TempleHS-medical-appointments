@@ -1,5 +1,5 @@
 import React, { FormEvent, useRef, useState } from "react";
-import { Logo } from "./Logo";
+import { Logo } from "./Icons/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

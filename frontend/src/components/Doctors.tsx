@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Logo } from "./Logo";
-import { AppointmentIcon } from "./AppointmentIcon";
+import { Logo } from "./Icons/Logo";
+import { AppointmentIcon } from "./Icons/AppointmentIcon";
 import { DashboardIcon } from "./DashboardIcon";
-import { Bell } from "./Bell";
-import { LeftArrow } from "./LeftArrow";
-import { RightArrow } from "./RightArrow";
-import { BackArrow } from "./BackArrow";
+import { Bell } from "./Icons/Bell";
+import { LeftArrow } from "./Icons/LeftArrow";
+import { RightArrow } from "./Icons/RightArrow";
+import { BackArrow } from "./Icons/BackArrow";
 import AppointmentModal, { Appointment } from "./AppointmentModal";
 
 interface Appointments {

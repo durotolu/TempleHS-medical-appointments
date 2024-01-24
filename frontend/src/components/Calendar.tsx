@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
-import { Logo } from "./Logo";
-import { AppointmentIcon } from "./AppointmentIcon";
+import { Logo } from "./Icons/Logo";
+import { AppointmentIcon } from "./Icons/AppointmentIcon";
 import { DashboardIcon } from "./DashboardIcon";
-import { Bell } from "./Bell";
-import { LeftArrow } from "./LeftArrow";
+import { Bell } from "./Icons/Bell";
+import { LeftArrow } from "./Icons/LeftArrow";
 import Scheduler from "./scheduler";
 
 export interface Appointment {
