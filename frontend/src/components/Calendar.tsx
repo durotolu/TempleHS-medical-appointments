@@ -52,7 +52,7 @@ const Calendar = () => {
       }
     };
     fetchAppointments();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <div className="h-full flex">

@@ -39,6 +39,7 @@ router.post("/login", midware.checkLoginInput, async (req, res) => {
           message: `Welcome ${data.email}`,
           token: token,
           user_id: data.id,
+          email: data.email,
         });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });

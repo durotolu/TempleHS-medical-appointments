@@ -28,7 +28,7 @@ export default function CalendarPage() {
     };
 
     fetchData();
-  }, []);
+  }, [apiUrl]);
 
   // const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
   const createUser = async () => {

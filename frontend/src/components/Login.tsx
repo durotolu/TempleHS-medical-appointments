@@ -42,7 +42,7 @@ const Login = () => {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       localStorage.setItem("user_id", data.user_id);
-      localStorage.setItem("user_email", data.user_email);
+      localStorage.setItem("user_email", data.email);
       router.push("/doctors");
     } catch (error) {
       let message;
