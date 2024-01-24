@@ -16,27 +16,20 @@ function findById(id) {
     .leftJoin("appointments", "users.id", "appointments.user_id")
     .where("users.id", id)
     .select(
-      "users.email",
-      "appointments.id as appointment_id",
+      // "users.email",
+      "appointments.id",
       "appointments.type",
       "appointments.doctor_id",
       "appointments.appointment"
     );
 }
 
-// async function add(park) {
-//   const [id] = await db('parks').insert(park, 'id');
-
-//   return findBy(id);
-// }
-
-function findDoctorById(id) {
-  return db("doctors").where("id", id);
-}
-
 async function add(user) {
-  const [{ id }] = await db("users").insert(user, "id");
+  const isUser = findByEmail(user.email);
+  // if (isUser) throw new Error("Email already exists");
+  // if (isUser) return isUser;
 
+  const [{ id }] = await db("users").insert(user, "id");
   return findById(id);
 }
 

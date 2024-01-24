@@ -2,36 +2,42 @@ const db = require("../../database/db-config");
 
 module.exports = {
   findAvailable,
-  // findById,
-  // add,
-  // findByEmail,
 };
 
 function findAvailable() {
-  return db("doctors")
-    .leftJoin("appointments", "doctors.id", "appointments.doctor_id")
-    // .select("id", "name", "title", "bio", "in_person", "photo")
-    .select(
-      "doctors.*",
-      "appointments.appointment",
-      "appointments.id as appointment_id"
-    )
-    .whereNull("appointments.user_id")
-    // .groupBy('doctors.id')
-    // .first()
-    // .then((parks) => parks.map((park) => mappers.parkPropertyToBoolean(park)));
+  return (
+    db("doctors")
+      .leftJoin("appointments", "doctors.id", "appointments.doctor_id")
+      .select(
+        "doctors.*",
+        "appointments.appointment as appointments",
+        "appointments.id as appointment_id"
+      )
+      .whereNull("appointments.user_id")
+      .then((doctors) => {
+        const uniqueDoctors = {};
+        doctors.map((doctor) => {
+          if (uniqueDoctors[doctor.id]) {
+            uniqueDoctors[doctor.id] = {
+              ...uniqueDoctors[doctor.id],
+              appointments: [
+                ...uniqueDoctors[doctor.id].appointments,
+                { time: doctor.appointments, id: doctor.appointment_id },
+              ],
+            };
+          } else {
+            uniqueDoctors[doctor.id] = {
+              ...doctor,
+              appointments: [
+                { time: doctor.appointments, id: doctor.appointment_id },
+              ],
+            };
+          }
+        });
+        return Object.keys(uniqueDoctors).map((index) => {
+          const { appointment_id, ...doctor } = uniqueDoctors[index];
+          return doctor;
+        });
+      })
+  );
 }
-
-// function findById(id) {
-//   return db("users").where({ id }).first();
-// }
-
-// async function add(user) {
-//   const [id] = await db("users").insert(user, "id");
-
-//   return findById(id);
-// }
-
-// function findByEmail(email) {
-//   return db("users").where({ email }).first();
-// }

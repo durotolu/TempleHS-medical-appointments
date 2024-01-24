@@ -14,6 +14,7 @@ exports.up = function (knex) {
     .createTable("doctors", (tbl) => {
       tbl.increments();
       tbl.string("name", 255).notNullable().unique();
+      tbl.string("degree", 255).notNullable();
       tbl.string("title", 255).notNullable();
       tbl.text("bio").notNullable();
       tbl.boolean("in_person").defaultTo(false);

@@ -1,34 +1,20 @@
 const router = require("express").Router();
 
 const Appointment = require("./appointments-model");
-// const midware = require("../middleware/middleware");
+const Users = require("../users/users-model");
+const midware = require('../../middleware/middleware');
 
-// router.get("/", (req, res) => {
-//   let user = req.body;
-//   const hash = bcrypt.hashSync(user.password, 12);
-//   user.password = hash;
+router.get("/:user_id", midware.verifyToken, (req, res) => {
+  Users.findById(req.params.user_id)
+    .then((appointments) => {
+      res.status(200).json(appointments);
+    })
+    .catch((error) => {
+      res.status(500).json(error.message);
+    });
+});
 
-//   Appointment.add(user)
-//     .then((saved) => {
-//       saved.password = null;
-//       res.status(201).json(saved);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error.message);
-//     });
-// });
-
-// router.get("/", (req, res) => {
-//   Parks.findBy()
-//     .then((parks) => {
-//       res.status(200).json(parks);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error.message);
-//     });
-// });
-
-router.put("/:id", (req, res) => {
+router.put("/:id", midware.verifyToken, (req, res) => {
   Appointment.update(req.params.id, req.body)
     .then((appointment) => {
       res.status(201).json(appointment);

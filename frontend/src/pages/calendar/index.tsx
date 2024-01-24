@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CardComponent from "../components/CardComponent";
-import Register from "../components/Register";
+import CardComponent from "../../components/CardComponent";
+import Calendar from "../../components/Calendar";
 import exp from "constants";
 
 interface User {
@@ -9,26 +9,26 @@ interface User {
   email: string;
 }
 
-export default function Home() {
+export default function CalendarPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   const [users, setUsers] = useState<User[]>([]);
   const [newUser, setNewUser] = useState({ name: "", email: "" });
   const [updateUser, setUpdateUser] = useState({ id: "", name: "", email: "" });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`${apiUrl}/api/users`);
-  //       const data = await response.json();
-  //       console.log("users", data);
-  //       setUsers(data.reverse());
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/users`);
+        const data = await response.json();
+        console.log("users", data);
+        setUsers(data.reverse());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   // const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
   const createUser = async () => {
@@ -103,21 +103,8 @@ export default function Home() {
   };
 
   return (
-    <main className={`min-h-screen items-center p-16`}>
-      {/* <h1>Alive</h1>
-      <div>
-        <button onClick={createUser}>Create</button>
-      </div>
-      <div>
-        <button onClick={loginUser}>loginUser</button>
-      </div>
-      <div>
-        <button onClick={createAppointment}>createAppointment</button>
-      </div>
-      {users.map((user) => (
-        <div key={user.id}>none</div>
-      ))} */}
-      <Register />
+    <main className={`min-h-screen items-center relative z-[99999999999]`}>
+      <Calendar />
     </main>
   );
 }

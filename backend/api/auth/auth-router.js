@@ -4,26 +4,33 @@ const bcrypt = require("bcryptjs");
 const Auth = require("../users/users-model");
 // const midware = require("../middleware/middleware");
 const generateToken = require("./generate-token");
+const midware = require('../../middleware/middleware');
 
 // router.post("/register", midware.checkUserInput, (req, res) => {
-router.post("/register", (req, res) => {
+router.post("/register", midware.checkRegisterInput, (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash;
 
-  Auth.add(user)
-    .then((saved) => {
-      saved.password = null;
-      res.status(201).json(saved);
-    })
-    .catch((error) => {
-      res.status(500).json(error.message);
-    });
+  Auth.findByEmail(user.email).then((data) => {
+    if (data) {
+      res.status(409).json({ message: "Email already exists" });
+    } else {
+      Auth.add(user)
+        .then((saved) => {
+          saved.password = null;
+          res.status(201).json(saved);
+        })
+        .catch((error) => {
+          res.status(500).json(error.message);
+        });
+    }
+  });
 });
 
 // router.post("/login", midware.checkUserInput, (req, res) => {
-router.post("/login", (req, res) => {
-  let user = req.body;
+router.post("/login", midware.checkLoginInput, async (req, res) => {
+  let user = await req.body;
   Auth.findByEmail(user.email)
     .then((data) => {
       if (data && bcrypt.compareSync(user.password, data.password)) {
