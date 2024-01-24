@@ -6,7 +6,11 @@
   "scripts": {
     "server": "nodemon index.ts",
     "start": "node index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "frontend-install": "npm install --prefix frontend",
+    "frontend": "cd ../ && npm run dev --prefix frontend"
+
   },
   "keywords": [],
   "author": "",
@@ -14,6 +18,7 @@
   "dependencies": {
     "@types/node": "^20.11.5",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
