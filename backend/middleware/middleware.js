@@ -29,9 +29,7 @@ function verifyToken(req, res, next) {
   if (token) {
     jwt.verify(
       token,
-      process.env.NODE_ENV === "development"
-        ? "this is supposed to be secret"
-        : process.env.SECRET,
+      process.env.SECRET || "this is supposed to be secret",
       (err, decodedToken) => {
         if (err) {
           res.status(401).json({ "credentials not valid": err });

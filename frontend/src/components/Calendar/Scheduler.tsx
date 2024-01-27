@@ -9,10 +9,9 @@ import {
   Agenda,
   Inject,
 } from "@syncfusion/ej2-react-schedule";
-import { Appointment } from "../Calendar";
+import { Appointment } from "./Calendar";
 
 const SchedulerComponent = ({events}: {events: Appointment[]}) => {
-  console.log("events", events)
   return (
     <ScheduleComponent
       currentView="Month"

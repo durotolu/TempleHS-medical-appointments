@@ -85,7 +85,7 @@ const Doctors = () => {
             </div>
           </div>
 
-          <div className="basis-1/2">
+          <div className="basis-1/2 h-full">
             <div className="flex">
               <input
                 placeholder="Select date"
@@ -100,18 +100,19 @@ const Doctors = () => {
                 className="p-4 h-[50px] rounded-md border border-neutral-800 border-opacity-30"
               />
             </div>
-
-            {doctors.map((doctor) => (
-              <DoctorCard
-                key={doctor.id}
-                setAppointment={setAppointment}
-                doctor={doctor}
-                setShowModal={setShowModal}
-                showModal={showModal}
-                doctors={doctors}
-                setDoctors={setDoctors}
-              />
-            ))}
+            <div className="overflow-y-scroll max-h-[80vh]">
+              {doctors.map((doctor) => (
+                <DoctorCard
+                  key={doctor.id}
+                  setAppointment={setAppointment}
+                  doctor={doctor}
+                  setShowModal={setShowModal}
+                  showModal={showModal}
+                  doctors={doctors}
+                  setDoctors={setDoctors}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

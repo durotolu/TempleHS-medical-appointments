@@ -15,9 +15,18 @@ cd .\frontend\
 npm install
 ```
 
+## Usage
+
+```sh
+cd .\backend\
+npm install
+npm run dev
+```
+
 ## Usage with docker
 
 ```sh
+cd .\backend\
 docker compose build
 docker compose up -d postgres
 npx knex migrate:latest

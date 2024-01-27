@@ -17,5 +17,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "src/components/scheduler/Scheduler.tsx", "src/components/helpers/WithAuth.jsx"]
+  "exclude": ["node_modules", "src/components/helpers/WithAuth.jsx"]
 }

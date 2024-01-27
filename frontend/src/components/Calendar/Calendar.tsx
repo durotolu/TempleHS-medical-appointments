@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import Scheduler from "./scheduler";
-import Sidebar from "./Sidebar";
-import withAuth from "./helpers/WithAuth";
+import Scheduler from "./Scheduler";
+import Sidebar from "../Sidebar";
+import withAuth from "../helpers/WithAuth";
 
 export interface Appointment {
   StartTime: string;

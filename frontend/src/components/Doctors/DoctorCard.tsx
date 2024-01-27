@@ -81,7 +81,7 @@ const DoctorCard = ({
           return (
             <button
               key={appId}
-              className={`w-[150px] px-3 py-[8px] rounded-[80px] border border-neutral-800 border-opacity-30 justify-center items-center gap-2.5 flex duration-700 ease-in-out ${
+              className={`w-[150px] px-3 py-[8px] rounded-[80px] border border-neutral-800 border-opacity-30 justify-center items-center gap-2.5 flex ${
                 !visible && "hidden"
               }`}
               onClick={() => {

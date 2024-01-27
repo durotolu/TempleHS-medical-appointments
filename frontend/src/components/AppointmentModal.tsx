@@ -71,7 +71,7 @@ export default function AppointmentModal({
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none p-6">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <div className="flex items-start justify-between p-5 border-b border-solid border-greenGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">Book Appointment</h3>
                 </div>
                 <div className="relative p-6 flex-auto">
@@ -125,7 +125,7 @@ export default function AppointmentModal({
               <div className="flex p-4">
                 <div className="flex-shrink-0">
                   <svg
-                    className="flex-shrink-0 h-4 w-4 text-blue-500 mt-0.5"
+                    className="flex-shrink-0 h-4 w-4 text-green-500 mt-0.5"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -137,7 +137,7 @@ export default function AppointmentModal({
                 </div>
                 <div className="ms-3">
                   <p className="text-sm text-gray-700 dark:text-gray-400">
-                    This is a normal message.
+                    Successfully booked appointment.
                   </p>
                 </div>
               </div>
