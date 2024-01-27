@@ -24,7 +24,7 @@ const dayOfWeek = {
 };
 
 const DoctorCard = ({
-  doctor: { id, bio, title, photo, in_person, name, appointments },
+  doctor: { id, bio, title, photo, in_person, name, appointments, degree },
   setAppointment,
   setShowModal,
   showModal,
@@ -50,7 +50,7 @@ const DoctorCard = ({
         <div className="flex flex-col">
           <div className="justify-start items-start inline-flex">
             <div className="grow shrink basis-0 text-green-950 text-[22px] font-medium font-['General Sans'] leading-[44.80px]">
-              {name}
+              {name}, {degree}
             </div>
           </div>
           <div className="justify-start items-start inline-flex">

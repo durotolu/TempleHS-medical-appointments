@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { BackArrow } from "../Icons/BackArrow";
 import AppointmentModal, { Appointment } from "../AppointmentModal";
 import Sidebar from "../Sidebar";
@@ -17,6 +17,7 @@ export interface Doctor {
   name: string;
   title: string;
   bio: string;
+  degree: string;
   in_person: boolean;
   photo: string;
   appointments: Appointments[];
@@ -26,6 +27,7 @@ const Doctors = () => {
   const apiUrl: string =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [filteredDoctors, setFilteredDoctors] = useState<Doctor[]>([]);
   const [appointment, setAppointment] = useState<Appointment>({
     id: null,
     appointment: "",
@@ -62,12 +64,22 @@ const Doctors = () => {
           }),
         }));
         setDoctors(dataVisible);
+        setFilteredDoctors(dataVisible);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchDoctorsAvailable();
   }, [apiUrl]);
+
+  function searchByDate(e: ChangeEvent<HTMLInputElement>): void {
+    const date = e.target.value;
+    const filteredDocs = doctors.filter((doctor) =>
+      doctor.appointments.find((appointment) => appointment.time.includes(date))
+    );
+    const docs = filteredDocs.length ? filteredDocs : doctors;
+    setFilteredDoctors(docs);
+  }
 
   return (
     <div className="h-full flex">
@@ -86,9 +98,11 @@ const Doctors = () => {
           </div>
 
           <div className="basis-1/2 h-full">
-            <div className="flex">
+            <div className="flex justify-between">
               <input
                 placeholder="Select date"
+                onChange={searchByDate}
+                type="date"
                 className="p-4 h-[50px] rounded-md border border-neutral-800 border-opacity-30"
               />
               <input
@@ -101,15 +115,15 @@ const Doctors = () => {
               />
             </div>
             <div className="overflow-y-scroll max-h-[80vh]">
-              {doctors.map((doctor) => (
+              {filteredDoctors.map((doctor) => (
                 <DoctorCard
                   key={doctor.id}
                   setAppointment={setAppointment}
                   doctor={doctor}
                   setShowModal={setShowModal}
                   showModal={showModal}
-                  doctors={doctors}
-                  setDoctors={setDoctors}
+                  doctors={filteredDoctors}
+                  setDoctors={setFilteredDoctors}
                 />
               ))}
             </div>
@@ -125,5 +139,4 @@ const Doctors = () => {
   );
 };
 
-// export default Doctors;
 export default WithAuth(Doctors);

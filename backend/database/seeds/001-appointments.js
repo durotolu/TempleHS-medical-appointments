@@ -44,14 +44,14 @@ exports.seed = async function (knex) {
     {
       id: 6,
       appointment: new Date(
-        new Date().getTime() + 50 * 50 * 60 * 1000
+        new Date().getTime() + 30 * 50 * 60 * 1000
       ).toISOString(),
       doctor_id: 2,
     },
     {
       id: 7,
       appointment: new Date(
-        new Date().getTime() + 30 * 60 * 60 * 1000
+        new Date().getTime() + 50 * 60 * 60 * 1000
       ).toISOString(),
       doctor_id: 2,
     },
@@ -72,7 +72,7 @@ exports.seed = async function (knex) {
     {
       id: 10,
       appointment: new Date(
-        new Date().getTime() + 78 * 60 * 60 * 1000
+        new Date().getTime() + 12 * 60 * 60 * 1000
       ).toISOString(),
       doctor_id: 4,
     },
@@ -86,28 +86,28 @@ exports.seed = async function (knex) {
     {
       id: 12,
       appointment: new Date(
-        new Date().getTime() + 30 * 50 * 60 * 1000
+        new Date().getTime() + 24 * 60 * 60 * 1000
       ).toISOString(),
       doctor_id: 4,
     },
     {
       id: 13,
       appointment: new Date(
-        new Date().getTime() + 12 * 60 * 60 * 1000
+        new Date().getTime() + 30 * 50 * 60 * 1000
       ).toISOString(),
       doctor_id: 4,
     },
     {
       id: 14,
       appointment: new Date(
-        new Date().getTime() + 24 * 60 * 60 * 1000
+        new Date().getTime() + 58 * 50 * 60 * 1000
       ).toISOString(),
       doctor_id: 4,
     },
     {
       id: 15,
       appointment: new Date(
-        new Date().getTime() + 58 * 50 * 60 * 1000
+        new Date().getTime() + 78 * 60 * 60 * 1000
       ).toISOString(),
       doctor_id: 4,
     },
