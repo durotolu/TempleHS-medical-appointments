@@ -33,11 +33,19 @@ const DoctorCard = ({
 }: Card) => (
   <div key={id} className="rounded-lg shadow mt-3">
     <div className="w-full flex justify-end">
-      <div className="w-[183px] h-7 px-[17px] py-[2px] bg-emerald-100 justify-center gap-2.5 inline-flex">
-        <div className="text-green-700 text-base font-semibold font-['General Sans'] leading-relaxed">
-          {in_person ? "In-person visit only" : "Virtual visit only"}
+      {in_person ? (
+        <div className="w-[183px] h-8 px-[17px] py-[3px] bg-blue-100 justify-center items-start gap-2.5 inline-flex">
+          <div className="text-slate-400 text-base font-semibold font-['General Sans'] leading-relaxed">
+            In-person visit only
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-[183px] h-7 px-[17px] py-[2px] bg-emerald-100 justify-center gap-2.5 inline-flex">
+          <div className="text-green-700 text-base font-semibold font-['General Sans'] leading-relaxed">
+            Virtual visit only
+          </div>
+        </div>
+      )}
     </div>
     <div className="px-4 pb-4">
       <div className="flex">

@@ -27,6 +27,8 @@ const Doctors = () => {
   const apiUrl: string =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [timeFilter, setTimeFilter] = useState<string>("");
+  const [dateFilter, setDateFilter] = useState<string>("");
   const [filteredDoctors, setFilteredDoctors] = useState<Doctor[]>([]);
   const [appointment, setAppointment] = useState<Appointment>({
     id: null,
@@ -72,14 +74,21 @@ const Doctors = () => {
     fetchDoctorsAvailable();
   }, [apiUrl]);
 
-  function searchByDate(e: ChangeEvent<HTMLInputElement>): void {
-    const date = e.target.value;
+  useEffect(() => {
+    console.log("sesd")
     const filteredDocs = doctors.filter((doctor) =>
-      doctor.appointments.find((appointment) => appointment.time.includes(date))
+      doctor.appointments.find((appointment) => {
+        const appointmentDate = appointment.time.split("T")[0]
+        const appointmentTime = appointment.time.split("T")[1].slice(0, 2)
+        console.log(appointmentDate, dateFilter, appointmentTime, timeFilter)
+        if (!dateFilter) return (parseInt(appointmentTime) <= (parseInt(timeFilter) + 1)) && (parseInt(appointmentTime) >= (parseInt(timeFilter) - 1))
+        if (!timeFilter) return appointmentDate === dateFilter
+        return appointmentDate === dateFilter && (parseInt(appointmentTime) <= (parseInt(timeFilter) + 1)) && (parseInt(appointmentTime) >= (parseInt(timeFilter) - 1))
+      })
     );
     const docs = filteredDocs.length ? filteredDocs : doctors;
     setFilteredDoctors(docs);
-  }
+  }, [timeFilter, doctors, dateFilter])
 
   return (
     <div className="h-full flex">
@@ -101,17 +110,19 @@ const Doctors = () => {
             <div className="flex justify-between">
               <input
                 placeholder="Select date"
-                onChange={searchByDate}
+                onChange={(e) => setDateFilter(e.target.value)}
                 type="date"
-                className="p-4 h-[50px] rounded-md border border-neutral-800 border-opacity-30"
+                className="p-4 h-[50px] w-[160px] rounded-md border border-neutral-800 border-opacity-30"
               />
               <input
                 placeholder="Select time range"
-                className="p-4 h-[50px] rounded-md border border-neutral-800 border-opacity-30"
+                onChange={(e) => setTimeFilter(e.target.value)}
+                type="time"
+                className="p-4 h-[50px] w-[160px] rounded-md border border-neutral-800 border-opacity-30"
               />
               <input
                 placeholder="Select expertise"
-                className="p-4 h-[50px] rounded-md border border-neutral-800 border-opacity-30"
+                className="p-4 h-[50px] w-[160px] rounded-md border border-neutral-800 border-opacity-30"
               />
             </div>
             <div className="overflow-y-scroll max-h-[80vh]">
