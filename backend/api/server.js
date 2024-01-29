@@ -1,6 +1,4 @@
 const express = require("express");
-// const cors = require('cors');
-// const helmet = require('helmet');
 
 const authRouter = require("./auth/auth-router");
 const usersRouter = require("./users/user-router");
@@ -9,22 +7,12 @@ const appointmentsRouter = require("./appointments/appointments-router");
 
 const app = express();
 
-// app.use(helmet());
-// app.use(cors());
-
-// app.use(cors({
-//   origin: "https://temple-hs-medical-appointments-frontend-fsj6hwl3l-durotolu.vercel.app/"
-//   // origin: process.env.NEXT_PUBLIC_API_URL
-// }));
-
 app.use(express.json());
 
-console.log(process.env.NEXT_PUBLIC_API_URL)
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", process.env.NODE_ALLOW);
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  // res.sendStatus(204);
   next();
 });
 
