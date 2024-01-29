@@ -77,9 +77,9 @@ const Doctors = () => {
   useEffect(() => {
     console.log("sesd")
     const filteredDocs = doctors.filter((doctor) =>
-      doctor.appointments.find((appointment) => {
-        const appointmentDate = appointment.time.split("T")[0]
-        const appointmentTime = appointment.time.split("T")[1].slice(0, 2)
+      doctor.appointments?.find((appointment) => {
+        const appointmentDate = appointment.time?.split("T")[0]
+        const appointmentTime = appointment.time?.split("T")[1].slice(0, 2)
         console.log(appointmentDate, dateFilter, appointmentTime, timeFilter)
         if (!dateFilter) return (parseInt(appointmentTime) <= (parseInt(timeFilter) + 1)) && (parseInt(appointmentTime) >= (parseInt(timeFilter) - 1))
         if (!timeFilter) return appointmentDate === dateFilter
@@ -150,5 +150,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
-// export default WithAuth(Doctors);
+export default WithAuth(Doctors);
