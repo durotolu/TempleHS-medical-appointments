@@ -23,7 +23,7 @@ app.use("/api/appointments", appointmentsRouter);
 
 app.get("/", (req, res) => {
   try {
-    res.send({ up: "up and runnin!!!" });
+    res.send({ templeHS: "Welcome to TempleHS!" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
