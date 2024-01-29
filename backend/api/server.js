@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://temple-hs-medical-appointments-frontend-fsj6hwl3l-durotolu.vercel.app");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(204);
+  // res.sendStatus(204);
   next();
 });
 
