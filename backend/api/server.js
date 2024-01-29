@@ -21,7 +21,7 @@ app.use(express.json());
 
 console.log(process.env.NEXT_PUBLIC_API_URL)
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://temple-hs-medical-appointments-frontend-fsj6hwl3l-durotolu.vercel.app/");
+  res.setHeader("Access-Control-Allow-Origin", "https://temple-hs-medical-appointments-frontend-fsj6hwl3l-durotolu.vercel.app");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(204);
