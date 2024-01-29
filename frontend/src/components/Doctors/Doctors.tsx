@@ -150,4 +150,5 @@ const Doctors = () => {
   );
 };
 
-export default WithAuth(Doctors);
+export default Doctors;
+// export default WithAuth(Doctors);
