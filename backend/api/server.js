@@ -13,7 +13,8 @@ const app = express();
 // app.use(cors());
 
 app.use(cors({
-  origin: process.env.NEXT_PUBLIC_API_URL
+  origin: "https://temple-hs-medical-appointments-frontend-fsj6hwl3l-durotolu.vercel.app/"
+  // origin: process.env.NEXT_PUBLIC_API_URL
 }));
 
 app.use(express.json());
