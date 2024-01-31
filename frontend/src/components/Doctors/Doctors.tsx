@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar";
 import Topbar from "./Topbar";
 import DoctorCard from "./DoctorCard";
 import WithAuth from "@/components/helpers/WithAuth";
+import Link from "next/link";
 
 interface Appointments {
   id: number;
@@ -75,20 +76,26 @@ const Doctors = () => {
   }, [apiUrl]);
 
   useEffect(() => {
-    console.log("sesd")
     const filteredDocs = doctors.filter((doctor) =>
       doctor.appointments?.find((appointment) => {
-        const appointmentDate = appointment.time?.split("T")[0]
-        const appointmentTime = appointment.time?.split("T")[1].slice(0, 2)
-        console.log(appointmentDate, dateFilter, appointmentTime, timeFilter)
-        if (!dateFilter) return (parseInt(appointmentTime) <= (parseInt(timeFilter) + 1)) && (parseInt(appointmentTime) >= (parseInt(timeFilter) - 1))
-        if (!timeFilter) return appointmentDate === dateFilter
-        return appointmentDate === dateFilter && (parseInt(appointmentTime) <= (parseInt(timeFilter) + 1)) && (parseInt(appointmentTime) >= (parseInt(timeFilter) - 1))
+        const appointmentDate = appointment.time?.split("T")[0];
+        const appointmentTime = appointment.time?.split("T")[1].slice(0, 2);
+        if (!dateFilter)
+          return (
+            parseInt(appointmentTime) <= parseInt(timeFilter) + 1 &&
+            parseInt(appointmentTime) >= parseInt(timeFilter) - 1
+          );
+        if (!timeFilter) return appointmentDate === dateFilter;
+        return (
+          appointmentDate === dateFilter &&
+          parseInt(appointmentTime) <= parseInt(timeFilter) + 1 &&
+          parseInt(appointmentTime) >= parseInt(timeFilter) - 1
+        );
       })
     );
     const docs = filteredDocs.length ? filteredDocs : doctors;
     setFilteredDoctors(docs);
-  }, [timeFilter, doctors, dateFilter])
+  }, [timeFilter, doctors, dateFilter]);
 
   return (
     <div className="h-full flex">
@@ -97,10 +104,13 @@ const Doctors = () => {
         <Topbar />
         <div className="flex pl-7 pr-20">
           <div className="w-[111px] h-[27px] justify-start items-center gap-3 basis-1/2">
-            <div className="text-green-950 text-xl font-normal font-['General Sans'] flex items-center gap-2 mb-12">
+            <Link
+              href="/calendar"
+              className="text-green-950 text-xl font-normal font-['General Sans'] flex items-center gap-2 mb-12"
+            >
               <BackArrow />
               Go back
-            </div>
+            </Link>
             <div className="text-green-950 text-[40px] font-normal font-['General Sans']">
               Select your doctor and appointment time
             </div>

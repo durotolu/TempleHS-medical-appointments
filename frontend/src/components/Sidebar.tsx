@@ -2,6 +2,7 @@ import React from "react";
 import { Logo } from "./Icons/Logo";
 import { AppointmentIcon } from "./Icons/AppointmentIcon";
 import { DashboardIcon } from "./DashboardIcon";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
@@ -16,21 +17,21 @@ const Sidebar = () => {
           <div className="w-2 h-2 bg-white rounded-full" />
         </div>
         <div className="self-stretch pl-10 pr-6 py-4 justify-between items-center inline-flex">
-          <div className="justify-start items-center gap-2 flex">
+          <Link className="justify-start items-center gap-2 flex" href={"/calendar"}>
             <DashboardIcon />
             <div className="text-stone-800 text-base font-medium font-['General Sans'] leading-relaxed">
               Dashboard
             </div>
-          </div>
+          </Link>
           <div className="w-2 h-2 bg-white rounded-full" />
         </div>
         <div className="self-stretch pl-10 pr-6 py-4 bg-emerald-50 justify-between items-center inline-flex">
-          <div className="justify-start items-center gap-2 flex mr-16">
+          <Link className="justify-start items-center gap-2 flex mr-16" href={"/doctors"}>
             <AppointmentIcon />
             <div className="text-green-700 text-base font-semibold font-['General Sans'] leading-relaxed">
               Appointments
             </div>
-          </div>
+          </Link>
           <div className="w-2 h-2 bg-green-700 rounded-full" />
         </div>
       </div>
